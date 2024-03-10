@@ -9,4 +9,5 @@ edition = "2021"
 [dependencies]
 solution_1 = { path = "solution_1" }
 solution_349 = { path = "solution_349" }
+solution_383 = { path = "solution_383" }
 solution_2540 = { path = "solution_2540" }
