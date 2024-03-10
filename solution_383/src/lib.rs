@@ -24,15 +24,14 @@ pub struct Solution;
 impl Solution {
     pub fn can_construct(ransom_note: String, magazine: String) -> bool {
         let mut map = magazine
-            .as_bytes()
-            .iter()
-            .fold([0; 26], |mut map, &x| {
+            .bytes()
+            .fold([0; 26], |mut map, x| {
                 let i = (x - b'a') as usize;
                 map[i] += 1;
                 map
             });
 
-        for &x in ransom_note.as_bytes().iter() {
+        for x in ransom_note.bytes() {
             let i = (x - b'a') as usize;
             map[i] -= 1;
 
