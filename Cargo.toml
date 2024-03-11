@@ -1,4 +1,4 @@
-workspace = { members = ["solution_1", "solution_2540", "solution_349", "solution_383"] }
+workspace = { members = ["solution_1", "solution_2540", "solution_349", "solution_383", "solution_791"] }
 [package]
 name = "leetcode_rust"
 version = "0.1.0"
@@ -10,4 +10,5 @@ edition = "2021"
 solution_1 = { path = "solution_1" }
 solution_349 = { path = "solution_349" }
 solution_383 = { path = "solution_383" }
+solution_791 = { path = "solution_791" }
 solution_2540 = { path = "solution_2540" }
