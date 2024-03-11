@@ -31,3 +31,21 @@
 /// - Order and s consist of lowercase English letters.
 /// - All the characters of order are unique.
 pub struct Solution;
+
+use std::collections::HashMap;
+
+impl Solution {
+    pub fn custom_sort_string(order: String, s: String) -> String {
+        let order_map = order
+            .bytes()
+            .enumerate()
+            .fold(HashMap::with_capacity(26), |mut map, (i, x)| {
+                map.insert(x, i);
+                map
+            });
+
+        let mut result = s.into_bytes();
+        result.sort_by_cached_key(|x| order_map.get(x).unwrap_or(&0));
+        String::from_utf8(result).unwrap()
+    }
+}
