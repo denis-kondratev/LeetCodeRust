@@ -24,18 +24,53 @@
 /// - Each node in the linked list has -1000 <= node.val <= 1000.
 pub struct Solution;
 
+impl Solution {
+    pub fn remove_zero_sum_sublists(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        // Move list values into an array
+        let mut list = vec![];
+        while let Some(node) = head {
+            list.push(node.val);
+            head = node.next;
+        }
+
+        // Remove zero-sum sequences from array
+        let mut start = 0;
+        while start < list.len() {
+            let mut prefix = 0;
+            let mut end = start;
+            while end < list.len() {
+                prefix += list[end];
+                if prefix == 0 {
+                    list.drain(start..=end);
+                    start -= 1;
+                    break;
+                }
+                end += 1;
+            }
+            start += 1;
+        }
+
+        // Create new list
+        let mut new = ListNode::new(0);
+        let mut n = &mut new;
+        for val in list.into_iter().map(ListNode::new).map(Box::new) {
+            n.next = Some(val);
+            n = n.next.as_mut()?;
+        }
+        n.next = None;
+        new.next
+    }
+}
+
 #[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
-  pub val: i32,
-  pub next: Option<Box<ListNode>>
+    pub val: i32,
+    pub next: Option<Box<ListNode>>,
 }
 
 impl ListNode {
-  #[inline]
-  fn new(val: i32) -> Self {
-    ListNode {
-      next: None,
-      val
+    #[inline]
+    fn new(val: i32) -> Self {
+        ListNode { next: None, val }
     }
-  }
 }
