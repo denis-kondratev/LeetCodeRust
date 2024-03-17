@@ -22,4 +22,38 @@
 /// - -2<sup>31</sup> <= x <= 2<sup>31</sup> - 1
 ///
 /// **Follow up:** Could you solve it without converting the integer to a string?
-struct Solution;
+pub struct Solution;
+
+impl Solution {
+    pub fn is_palindrome(mut x: i32) -> bool {
+        if x < 0 {
+            return false;
+        }
+
+        if x == 0 {
+            return true;
+        }
+
+        let mut digits = [0u8; 10];
+        let mut size = 0;
+
+        while x > 0 {
+            digits[size] = (x % 10) as u8;
+            x /= 10;
+            size += 1;
+        }
+
+        let (mut left, mut right) = (0, size - 1);
+
+        while left < right {
+            if digits[left] != digits[right] {
+                return false;
+            }
+
+            left += 1;
+            right -= 1;
+        }
+
+        true
+    }
+}
