@@ -38,3 +38,24 @@
 /// - `points[i].length` == 2
 /// - -2<sup>31</sup> <= x<sub>start</sub> < x<sub>end</sub> <= 2<sup>31</sup> - 1
 pub struct Solution;
+
+use std::cmp::min;
+
+impl Solution {
+    pub fn find_min_arrow_shots(mut points: Vec<Vec<i32>>) -> i32 {
+        points.sort_unstable_by_key(|p| p[0]);
+        let mut count = 1;
+        let mut threshold = points[0][1];
+
+        for point in points.iter().skip(1) {
+            if point[0] <= threshold {
+                threshold = min(threshold, point[1]);
+            } else {
+                count += 1;
+                threshold = point[1];
+            }
+        }
+
+        count
+    }
+}
