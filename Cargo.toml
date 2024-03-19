@@ -1,5 +1,5 @@
 workspace = { members = ["solution_1", "solution_1171", "solution_2540", "solution_349", "solution_383",
-    "solution_452", "solution_791", "solution_9"] }
+    "solution_452", "solution_621", "solution_791", "solution_9"] }
 [package]
 name = "leetcode_rust"
 version = "0.1.0"
@@ -13,6 +13,7 @@ solution_9 = { path = "solution_9" }
 solution_349 = { path = "solution_349" }
 solution_383 = { path = "solution_383" }
 solution_452 = { path = "solution_452" }
+solution_621 = { path = "solution_621" }
 solution_791 = { path = "solution_791" }
 solution_1171 = { path = "solution_1171" }
 solution_2540 = { path = "solution_2540" }
