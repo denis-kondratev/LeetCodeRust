@@ -18,3 +18,60 @@
 /// - 1 <= `a` <= `b` < `list1.length` - 1
 /// - 1 <= `list2.length` <= 10<sup>4</sup>
 pub struct Solution;
+
+#[derive(PartialEq, Eq, Clone, Debug)]
+pub struct ListNode {
+    pub val: i32,
+    pub next: Option<Box<ListNode>>,
+}
+
+trait NodeManager {
+    fn skip_as_mut_ref(&mut self, count: i32) -> Option<&mut Self>;
+    fn skip(self, count: i32) -> Option<Self> where Self: Sized;
+    fn get_last_as_mut_ref(&mut self) -> &mut Self;
+}
+
+impl NodeManager for Box<ListNode> {
+    fn skip_as_mut_ref(&mut self, count: i32) -> Option<&mut Self> {
+        let mut current = self;
+        for _ in 0..count {
+            current = current.next.as_mut()?;
+        }
+        Some(current)
+    }
+
+    fn skip(self, count: i32) -> Option<Self> {
+        let mut current = self;
+        for _ in 0..count {
+            current = current.next?;
+        }
+        Some(current)
+    }
+
+    fn get_last_as_mut_ref(&mut self) -> &mut Self {
+        let mut node = self;
+        while let Some(ref mut next) = node.next {
+            node = next;
+        }
+        node
+    }
+}
+
+impl Solution {
+    pub fn merge_in_between(
+        list1: Option<Box<ListNode>>,
+        a: i32,
+        b: i32,
+        list2: Option<Box<ListNode>>,
+    ) -> Option<Box<ListNode>> {
+        let mut head1 = list1?;
+        let mut head2 = list2?;
+        let last2 = head2.get_last_as_mut_ref();
+        let a_node = head1.skip_as_mut_ref(a - 1)?;
+        let next_a = std::mem::take(&mut a_node.next)?;
+        let b_node = next_a.skip(b - a + 1)?;
+        last2.next = Some(b_node);
+        a_node.next = Some(head2);
+        Some(head1)
+    }
+}
