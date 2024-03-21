@@ -35,7 +35,7 @@ pub struct Solution;
 
 impl Solution {
     pub fn least_interval(tasks: Vec<char>, n: i32) -> i32 {
-        const MAP_SIZE:usize = (b'Z' - b'A' + 1) as usize;
+        const MAP_SIZE: usize = (b'Z' - b'A' + 1) as usize;
         let mut map = [0i32; MAP_SIZE];
 
         for &x in tasks.iter() {
