@@ -25,38 +25,6 @@ pub struct ListNode {
     pub next: Option<Box<ListNode>>,
 }
 
-trait NodeManager {
-    fn skip_as_mut_ref(&mut self, count: i32) -> Option<&mut Self>;
-    fn skip(self, count: i32) -> Option<Self> where Self: Sized;
-    fn get_last_as_mut_ref(&mut self) -> &mut Self;
-}
-
-impl NodeManager for Box<ListNode> {
-    fn skip_as_mut_ref(&mut self, count: i32) -> Option<&mut Self> {
-        let mut current = self;
-        for _ in 0..count {
-            current = current.next.as_mut()?;
-        }
-        Some(current)
-    }
-
-    fn skip(self, count: i32) -> Option<Self> {
-        let mut current = self;
-        for _ in 0..count {
-            current = current.next?;
-        }
-        Some(current)
-    }
-
-    fn get_last_as_mut_ref(&mut self) -> &mut Self {
-        let mut node = self;
-        while let Some(ref mut next) = node.next {
-            node = next;
-        }
-        node
-    }
-}
-
 impl Solution {
     pub fn merge_in_between(
         list1: Option<Box<ListNode>>,
@@ -64,14 +32,35 @@ impl Solution {
         b: i32,
         list2: Option<Box<ListNode>>,
     ) -> Option<Box<ListNode>> {
-        let mut head1 = list1?;
-        let mut head2 = list2?;
-        let last2 = head2.get_last_as_mut_ref();
-        let a_node = head1.skip_as_mut_ref(a - 1)?;
-        let next_a = std::mem::take(&mut a_node.next)?;
-        let b_node = next_a.skip(b - a + 1)?;
-        last2.next = Some(b_node);
-        a_node.next = Some(head2);
-        Some(head1)
+        let mut list1_head = list1?;
+        let mut list2_head = list2?;
+
+        let cut_begin = {
+            let mut node = &mut list1_head;
+            for _ in 0..a - 1 {
+                node = node.next.as_mut()?;
+            }
+            node
+        };
+
+        let cut_end = {
+            let mut node = std::mem::take(&mut cut_begin.next)?;
+            for _ in 0..b - a + 1 {
+                node = node.next?;
+            }
+            node
+        };
+
+        let list2_last = {
+            let mut node = &mut list2_head;
+            while let Some(ref mut next) = node.next {
+                node = next;
+            }
+            node
+        };
+
+        list2_last.next = Some(cut_end);
+        cut_begin.next = Some(list2_head);
+        Some(list1_head)
     }
 }
