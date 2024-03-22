@@ -44,7 +44,7 @@ impl Solution {
         };
 
         let cut_end = {
-            let mut node = std::mem::take(&mut cut_begin.next)?;
+            let mut node = cut_begin.next.take()?;
             for _ in 0..b - a + 1 {
                 node = node.next?;
             }
