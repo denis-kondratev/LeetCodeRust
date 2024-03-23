@@ -20,3 +20,40 @@
 /// - The number of nodes in the list is in the range \[1, 5 * 104].
 /// - 1 <= Node.val <= 1000
 pub struct Solution;
+
+#[derive(PartialEq, Eq, Clone, Debug)]
+pub struct ListNode {
+  pub val: i32,
+  pub next: Option<Box<ListNode>>
+}
+
+use std::collections::VecDeque;
+use std::ops::DerefMut;
+
+impl Solution {
+    pub fn reorder_list(head: &mut Option<Box<ListNode>>) {
+        let mut head = head.as_mut().unwrap();
+        let mut deque = VecDeque::new();
+        let mut node = match head.next.take() {
+            Some(next) => next,
+            None => return
+        };
+
+        loop {
+            let next = node.deref_mut().next.take();
+            deque.push_back(node);
+            node = match next {
+                Some(value) => value,
+                None => break
+            };
+        }
+
+        let mut take_from_front = false;
+
+        while let Some(next) = if take_from_front { deque.pop_front() } else { deque.pop_back() } {
+            head.next = Some(next);
+            head = head.deref_mut().next.as_mut().unwrap();
+            take_from_front = !take_from_front;
+        }
+    }
+}
