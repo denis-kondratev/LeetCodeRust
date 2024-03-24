@@ -23,8 +23,8 @@ pub struct Solution;
 
 #[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
-  pub val: i32,
-  pub next: Option<Box<ListNode>>
+    pub val: i32,
+    pub next: Option<Box<ListNode>>,
 }
 
 use std::collections::VecDeque;
@@ -36,7 +36,7 @@ impl Solution {
         let mut deque = VecDeque::new();
         let mut node = match head.next.take() {
             Some(next) => next,
-            None => return
+            None => return,
         };
 
         loop {
@@ -44,13 +44,17 @@ impl Solution {
             deque.push_back(node);
             node = match next {
                 Some(value) => value,
-                None => break
+                None => break,
             };
         }
 
         let mut take_from_front = false;
 
-        while let Some(next) = if take_from_front { deque.pop_front() } else { deque.pop_back() } {
+        while let Some(next) = if take_from_front {
+            deque.pop_front()
+        } else {
+            deque.pop_back()
+        } {
             head.next = Some(next);
             head = head.deref_mut().next.as_mut().unwrap();
             take_from_front = !take_from_front;
