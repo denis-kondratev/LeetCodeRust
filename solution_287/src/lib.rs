@@ -28,3 +28,15 @@
 /// - How can we prove that at least one duplicate number must exist in nums?
 /// - Can you solve the problem in linear runtime complexity?
 pub struct Solution;
+
+impl Solution {
+    pub fn find_duplicate(mut nums: Vec<i32>) -> i32 {
+        let mut num = nums[0] as usize;
+        while nums[num] > 0 {
+            let next_num = nums[num] as usize;
+            nums[num] = 0;
+            num = next_num;
+        }
+        num as i32
+    }
+}
