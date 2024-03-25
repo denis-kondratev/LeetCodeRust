@@ -24,3 +24,18 @@
 /// - 1 <= `nums[i]` <= `n`
 /// - Each element in nums appears once or twice.
 pub struct Solution;
+
+impl Solution {
+    pub fn find_duplicates(mut nums: Vec<i32>) -> Vec<i32> {
+        let mut duplicates = Vec::new();
+        for i in 0..nums.len() {
+            let idx = nums[i].abs() as usize - 1;
+            if nums[idx] < 0 {
+                duplicates.push(idx as i32 + 1);
+            } else {
+                nums[idx] = -nums[idx];
+            }
+        }
+        duplicates
+    }
+}
