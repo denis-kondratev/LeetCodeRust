@@ -23,3 +23,25 @@
 /// - 1 <= `nums.length` <= 10<sup>5</sup>
 /// - -2<sup>31</sup> <= `nums[i]` <= 2<sup>31</sup> - 1
 pub struct Solution;
+
+impl Solution {
+    pub fn first_missing_positive(mut nums: Vec<i32>) -> i32 {
+        let mut i = 0;
+        while i < nums.len() {
+            let x = nums[i];
+            let j = x as usize - 1;
+            if x > 0 && j < nums.len() && i != j && nums[i] != nums[j] {
+                nums.swap(i, j);
+            } else {
+                i += 1;
+            }
+        }
+
+        let result = nums.iter().enumerate().find_map(|(i, &x)| {
+            let i = i as i32 + 1;
+            if i != x { Some(i) } else { None }
+        });
+
+        if let Some(value) = result { value } else { nums.len() as i32 + 1}
+    }
+}
