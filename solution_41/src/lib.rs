@@ -39,9 +39,17 @@ impl Solution {
 
         let result = nums.iter().enumerate().find_map(|(i, &x)| {
             let i = i as i32 + 1;
-            if i != x { Some(i) } else { None }
+            if i != x {
+                Some(i)
+            } else {
+                None
+            }
         });
 
-        if let Some(value) = result { value } else { nums.len() as i32 + 1}
+        if let Some(value) = result {
+            value
+        } else {
+            nums.len() as i32 + 1
+        }
     }
 }
