@@ -27,3 +27,38 @@
 /// - 1 <= `nums[i]` <= 10<sup>9</sup>
 /// - 1 <= `k` <= `nums.length`
 pub struct Solution;
+
+use std::collections::HashMap;
+
+impl Solution {
+    pub fn max_subarray_length(nums: Vec<i32>, k: i32) -> i32 {
+        let k = k as usize;
+        if k == nums.len() {
+            return k as i32;
+        }
+        let mut map = HashMap::new();
+        let mut max_length = 0;
+        let mut left= 0;
+
+        for right in 0..nums.len() {
+            let right_num = nums[right];
+            let right_num_count = map.entry(right_num).or_insert(0);
+            *right_num_count += 1;
+            let mut num_count = *right_num_count;
+
+            while num_count > k {
+                let left_num = nums[left];
+                left += 1;
+                let left_num_count = map.entry(left_num).or_insert(0);
+                *left_num_count -= 1;
+                if left_num == right_num {
+                    num_count = *left_num_count;
+                }
+            }
+
+            max_length = max_length.max(right - left + 1);
+        }
+
+        max_length as i32
+    }
+}
