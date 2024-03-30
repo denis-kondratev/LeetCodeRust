@@ -22,7 +22,9 @@ pub struct Solution;
 
 impl Solution {
     pub fn num_subarray_product_less_than_k(nums: Vec<i32>, k: i32) -> i32 {
-        if k <= 1 { return 0; }
+        if k <= 1 {
+            return 0;
+        }
         let (mut left, mut product, mut count) = (0, 1, 0);
 
         for right in 0..nums.len() {
