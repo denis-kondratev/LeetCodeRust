@@ -19,3 +19,22 @@
 /// - 1 <= `nums[i]` <= 10<sup>6</sup>
 /// - 1 <= `k` <= 10<sup>5</sup>
 pub struct Solution;
+
+impl Solution {
+    pub fn count_subarrays(nums: Vec<i32>, k: i32) -> i64 {
+        let (mut max_num_count, mut left, mut result) = (0, 0, 0);
+        let max_num = *nums.iter().max().unwrap();
+
+        for right in 0..nums.len() {
+            max_num_count += if nums[right] == max_num { 1 } else { 0 };
+            while max_num_count == k {
+                max_num_count -= if nums[left] == max_num { 1 } else { 0 };
+                left += 1;
+            }
+
+            result += left;
+         }
+
+        result as i64
+    }
+}
