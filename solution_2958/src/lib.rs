@@ -38,7 +38,7 @@ impl Solution {
         }
         let mut map = HashMap::new();
         let mut max_length = 0;
-        let mut left= 0;
+        let mut left = 0;
 
         for right in 0..nums.len() {
             let right_num = nums[right];
