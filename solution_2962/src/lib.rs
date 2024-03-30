@@ -33,7 +33,7 @@ impl Solution {
             }
 
             result += left;
-         }
+        }
 
         result as i64
     }
