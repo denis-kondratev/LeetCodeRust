@@ -23,3 +23,24 @@
 /// - 2 <= `nums.length` <= 10<sup>5</sup>
 /// - 1 <= `nums[i]`, `minK`, `maxK` <= 10<sup>6</sup>
 pub struct Solution;
+
+impl Solution {
+    pub fn count_subarrays(nums: Vec<i32>, min_k: i32, max_k: i32) -> i64 {
+        let (mut count, mut left): (i64, i64) = (0, -1);
+        let (mut prev_max_k_idx, mut prev_min_k_idx): (i64, i64) = (-1, -1);
+
+        for (right, &num) in nums.iter().enumerate() {
+            let right = right as i64;
+            if num < min_k || num > max_k {
+                left = right;
+            } else {
+                prev_min_k_idx = if num == min_k { right } else { prev_min_k_idx };
+                prev_max_k_idx = if num == max_k { right } else { prev_max_k_idx };
+            }
+
+            count += (prev_max_k_idx.min(prev_min_k_idx) - left).max(0);
+        }
+
+        count
+    }
+}
