@@ -23,3 +23,30 @@
 /// - `s     consists of only English letters and spaces ' '.
 /// - There will be at least one word in `s`.
 pub struct Solution;
+
+impl Solution {
+    pub fn length_of_last_word(s: String) -> i32 {
+        let word_end = match s
+            .as_bytes()
+            .iter()
+            .rev()
+            .enumerate()
+            .find_map(|(i, x)| { if *x != b' ' { Some(i) } else { None }
+        }) {
+            None => return 0,
+            Some(value) => value,
+        };
+
+        match s
+            .as_bytes()
+            .iter()
+            .rev()
+            .skip(word_end)
+            .enumerate()
+            .find_map(|(i, x)| if *x == b' ' { Some(i) } else { None })
+        {
+            None => (s.len() - word_end) as i32,
+            Some(value) => value as i32,
+        }
+    }
+}
