@@ -29,3 +29,27 @@
 /// - `grid[i][j]` is 0 or 1.
 /// - There is exactly one island in `grid`.
 pub struct Solution;
+
+impl Solution {
+    pub fn island_perimeter(grid: Vec<Vec<i32>>) -> i32 {
+        let mut result = 0;
+
+        for i in 0..grid.len() {
+            for j in 0..grid[i].len() {
+                if grid[i][j] == 1 {
+                    result += 4;
+
+                    if j > 0 && grid[i][j - 1] == 1 {
+                        result -= 2;
+                    }
+
+                    if i > 0 && grid[i - 1][j] == 1 {
+                        result -= 2;
+                    }
+                }
+            }
+        }
+
+        result
+    }
+}
