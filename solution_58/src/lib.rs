@@ -26,12 +26,12 @@ pub struct Solution;
 
 impl Solution {
     pub fn length_of_last_word(s: String) -> i32 {
-        let word_end = match s
-            .as_bytes()
-            .iter()
-            .rev()
-            .enumerate()
-            .find_map(|(i, x)| { if *x != b' ' { Some(i) } else { None }
+        let word_end = match s.as_bytes().iter().rev().enumerate().find_map(|(i, x)| {
+            if *x != b' ' {
+                Some(i)
+            } else {
+                None
+            }
         }) {
             None => return 0,
             Some(value) => value,
