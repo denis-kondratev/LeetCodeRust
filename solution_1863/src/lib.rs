@@ -39,6 +39,6 @@
 /// - Explanation: The sum of all XOR totals for every subset is 480.
 ///
 /// ## Constraints:
-/// - `1 <= nums.length <= 12`
-/// - `1 <= nums[i] <= 20`
+/// - `1` <= `nums.length` <= `12`
+/// - `1` <= `nums[i]` <= `20`
 pub struct Solution;
