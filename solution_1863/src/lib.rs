@@ -45,21 +45,12 @@ pub struct Solution;
 
 impl Solution {
     pub fn subset_xor_sum(nums: Vec<i32>) -> i32 {
-        Self::pointed_subset_xor_sum(&nums, 0, 0)
-    }
+        let mut result = 0;
 
-    fn pointed_subset_xor_sum(nums: &Vec<i32>, xor: i32, start_i: usize) -> i32 {
-        if start_i >= nums.len() {
-            return 0;
+        for x in nums.iter() {
+            result |= x;
         }
 
-        let mut sum = 0;
-
-        for i in start_i..nums.len() {
-            let cur_xor = xor ^ nums[i];
-            sum += cur_xor + Self::pointed_subset_xor_sum(nums, cur_xor, i + 1);
-        }
-
-        sum
+        result << (nums.len() - 1)
     }
 }
