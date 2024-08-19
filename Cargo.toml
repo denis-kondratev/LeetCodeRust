@@ -1,5 +1,5 @@
 workspace = { members = ["solution_1", "solution_1171", "solution_1380", "solution_143", "solution_1669", "solution_1863", "solution_234", "solution_2444", "solution_2540", "solution_264", "solution_287", "solution_2958", "solution_2962", "solution_349", "solution_383", "solution_41", "solution_442",
-    "solution_452", "solution_463", "solution_58", "solution_621", "solution_713", "solution_791", "solution_9", "solution_992"] }
+    "solution_452", "solution_463", "solution_58", "solution_621", "solution_650", "solution_713", "solution_791", "solution_9", "solution_992"] }
 [package]
 name = "leetcode_rust"
 version = "0.1.0"
@@ -22,6 +22,7 @@ solution_442 = { path = "solution_442" }
 solution_452 = { path = "solution_452" }
 solution_463 = { path = "solution_463" }
 solution_621 = { path = "solution_621" }
+solution_650 = { path = "solution_650" }
 solution_713 = { path = "solution_713" }
 solution_791 = { path = "solution_791" }
 solution_992 = { path = "solution_992" }
