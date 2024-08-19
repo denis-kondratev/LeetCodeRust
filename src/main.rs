@@ -1,4 +1,4 @@
 fn main() {
-    solution_287::Solution::find_duplicate(vec![1, 3, 4, 2, 2]);
+    solution_264::Solution::nth_ugly_number(10);
     println!("Hello, world!");
 }

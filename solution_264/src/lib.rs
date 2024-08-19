@@ -17,3 +17,26 @@
 /// ## Constraints:
 /// - 1 <= n <= 1690
 pub struct Solution;
+
+impl Solution {
+    pub fn nth_ugly_number(n: i32) -> i32 {
+        let mut ugly_numbers = vec![1];
+        let primes = [2, 3, 5];
+        let mut ugly_candidates = [2, 3, 5];
+        let mut prime_indices = [1, 1, 1];
+
+        for _ in 1..n {
+            let ugly = ugly_candidates.into_iter().min().unwrap();
+            ugly_numbers.push(ugly);
+
+            for i in 0..3 {
+                if ugly == ugly_candidates[i] {
+                    ugly_candidates[i] = ugly_numbers[prime_indices[i]] * primes[i];
+                    prime_indices[i] += 1;
+                }
+            }
+        }
+
+        *ugly_numbers.last().unwrap()
+    }
+}
