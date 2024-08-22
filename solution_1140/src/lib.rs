@@ -27,3 +27,38 @@
 /// - 1 <= `piles.length` <= 100
 /// - 1 <= `piles[i]` <= 10<sup>4</sup>
 pub struct Solution;
+
+impl Solution {
+    pub fn stone_game_ii(piles: Vec<i32>) -> i32 {
+        Self::get_stones(&piles, 0, 1).0
+    }
+
+    fn get_stones(piles: &Vec<i32>, start: usize, m: usize) -> (i32, usize) {
+        if start >= piles.iter().len() {
+            return (0, m);
+        }
+
+        let next_m1 = Self::get_stones(piles, start + m, m).1;
+        let sum1 = Self::get_sum(piles, start, m) + Self::get_stones(piles, start + m + next_m1, next_m1).0;
+        let m2 = m * 2;
+        let next_m2 = Self::get_stones(piles, start + m2, m2).1;
+        let sum2 = Self::get_sum(piles, start, m2) + Self::get_stones(piles, start + m2 + next_m2, next_m2).0;
+
+        if sum1 > sum2 {
+            (sum1, m)
+        }
+        else {
+            (sum2, m * 2)
+        }
+    }
+
+    fn get_sum(piles: &Vec<i32>, start: usize, count: usize) -> i32 {
+        if start >= piles.len() {
+            return 0;
+        }
+
+        (&piles[start..std::cmp::min(start + count, piles.len())])
+            .iter()
+            .sum()
+    }
+}
