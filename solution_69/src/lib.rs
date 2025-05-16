@@ -15,7 +15,7 @@
 /// ## Example 2:
 /// - Input: `x = 8`
 /// - Output: `2`
-/// - Explanation: The square root of `8` is `2.82842`..., and since we round it down to the
+/// - Explanation: The square root of `8` is `2.82842...`, and since we round it down to the
 ///   nearest integer, `2` is returned.
 ///
 /// ## Constraints:
@@ -24,6 +24,24 @@ pub struct Solution;
 
 impl Solution {
     pub fn my_sqrt(x: i32) -> i32 {
-        0
+        if x < 2 {
+            return x;
+        }
+
+        let mut left = 1;
+        let mut right = x / 2;
+        let mut ans = 0;
+
+        while left <= right {
+            let mid = left + (right - left) / 2;
+            if mid <= x / mid {
+                ans = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        ans
     }
 }
