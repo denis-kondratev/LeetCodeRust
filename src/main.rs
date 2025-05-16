@@ -1,4 +1,4 @@
 fn main() {
-    solution_264::Solution::nth_ugly_number(10);
+    solution_66::Solution::plus_one(vec![1, 2, 3]);
     println!("Hello, world!");
 }

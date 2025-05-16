@@ -11,31 +11,4 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-solution_1 = { path = "solution_1" }
-solution_9 = { path = "solution_9" }
-solution_41 = { path = "solution_41" }
-solution_58 = { path = "solution_58" }
 solution_66 = { path = "solution_66" }
-solution_143 = { path = "solution_143" }
-solution_234 = { path = "solution_234" }
-solution_264 = { path = "solution_264" }
-solution_287 = { path = "solution_287" }
-solution_349 = { path = "solution_349" }
-solution_383 = { path = "solution_383" }
-solution_442 = { path = "solution_442" }
-solution_452 = { path = "solution_452" }
-solution_463 = { path = "solution_463" }
-solution_621 = { path = "solution_621" }
-solution_650 = { path = "solution_650" }
-solution_713 = { path = "solution_713" }
-solution_791 = { path = "solution_791" }
-solution_992 = { path = "solution_992" }
-solution_1140 = { path = "solution_1140" }
-solution_1171 = { path = "solution_1171" }
-solution_1380 = { path = "solution_1380" }
-solution_1669 = { path = "solution_1669" }
-solution_1863 = { path = "solution_1863" }
-solution_2444 = { path = "solution_2444" }
-solution_2540 = { path = "solution_2540" }
-solution_2958 = { path = "solution_2958" }
-solution_2962 = { path = "solution_2962" }
