@@ -21,7 +21,24 @@ use list_node::ListNode;
 pub struct Solution;
 
 impl Solution {
-    pub fn delete_duplicates(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        Option::None
+    pub fn delete_duplicates(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        let mut current_opt = head.as_mut();
+
+        while let Some(current) = current_opt {
+            Self::delete_following_duplicates(current);
+            current_opt = current.next.as_mut();
+        }
+
+        head
+    }
+
+    fn delete_following_duplicates(node: &mut Box<ListNode>) {
+        while let Some(next) = node.next.as_mut() {
+            if node.val != next.val {
+                break;
+            }
+
+            node.next = next.next.take();
+        }
     }
 }
