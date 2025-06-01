@@ -34,7 +34,7 @@ use std::rc::Rc;
 use std::cell::RefCell;
 
 impl Solution {
-    pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+    pub fn inorder_traversal(_root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
         vec![]
     }
 }
