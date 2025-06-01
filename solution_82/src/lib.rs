@@ -28,8 +28,11 @@
 ///
 /// **Follow up:** Recursive solution is trivial, could you do it iteratively?
 pub struct Solution;
+
+use binary_tree::TreeNode;
 use std::rc::Rc;
 use std::cell::RefCell;
+
 impl Solution {
     pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
         vec![]
