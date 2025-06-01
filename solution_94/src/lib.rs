@@ -30,11 +30,28 @@
 pub struct Solution;
 
 use binary_tree::TreeNode;
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 
 impl Solution {
-    pub fn inorder_traversal(_root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
-        vec![]
+    pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+        // Create a stack to hold nodes for iterative traversal
+        let mut stack = vec![];
+        let mut result = vec![];
+        let mut current = root;
+
+        while current.is_some() || !stack.is_empty() {
+            while let Some(node) = current.clone() {
+                stack.push(node.clone());
+                current = node.borrow().left.clone();
+            }
+
+            if let Some(node) = stack.pop() {
+                result.push(node.borrow().val);
+                current = node.borrow().right.clone();
+            }
+        }
+
+        result
     }
 }
