@@ -1,0 +1,7 @@
+[package]
+name = "solutioin_100"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+binary_tree = { path = "../binary_tree" }
