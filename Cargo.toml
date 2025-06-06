@@ -1,4 +1,4 @@
-workspace = { members = [ "binary_tree", "solutioin_100","solution_1", "solution_1140", "solution_1171", "solution_1380", "solution_143",
+workspace = { members = [ "binary_tree", "solutioin_100","solution_1", "solution_101", "solution_1140", "solution_1171", "solution_1380", "solution_143",
     "solution_1669", "solution_1863", "solution_234", "solution_2444", "solution_2540", "solution_264", "solution_287",
     "solution_2958", "solution_2962", "solution_349", "solution_383", "solution_41", "solution_442", "solution_452",
     "solution_463", "solution_58", "solution_621", "solution_650", "solution_66", "solution_69", "solution_713",
