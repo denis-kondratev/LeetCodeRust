@@ -20,12 +20,25 @@
 /// **Follow up:** Could you solve it both recursively and iteratively?
 pub struct Solution;
 
-use std::rc::Rc;
-use std::cell::RefCell;
 use binary_tree::TreeNode;
+use std::cell::RefCell;
+use std::rc::Rc;
+type Node = Option<Rc<RefCell<TreeNode>>>;
 
 impl Solution {
-    pub fn is_symmetric(_root: Option<Rc<RefCell<TreeNode>>>) -> bool {
-        false
+    pub fn is_symmetric(root: Node) -> bool {
+        Self::are_symmetric(&root, &root)
+    }
+
+    fn are_symmetric(left: &Node, right: &Node) -> bool {
+        match (left, right) {
+            (Some(left), Some(right)) => {
+                left.borrow().val == right.borrow().val
+                    && Self::are_symmetric(&left.borrow().left, &right.borrow().right)
+                    && Self::are_symmetric(&left.borrow().right, &right.borrow().left)
+            }
+            (None, None) => true,
+            (_, _) => false,
+        }
     }
 }
