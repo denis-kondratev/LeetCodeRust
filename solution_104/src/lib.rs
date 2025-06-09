@@ -21,10 +21,18 @@ pub struct Solution;
 use binary_tree::TreeNode;
 use std::cell::RefCell;
 use std::rc::Rc;
-type Node = Option<Rc<RefCell<TreeNode>>>;
 
 impl Solution {
-    pub fn max_depth(_root: Node) -> i32 {
-        0
+    pub fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        let Some(root) = root else {
+            return 0;
+        };
+
+        let root = root.borrow();
+
+        1 + std::cmp::max(
+            Self::max_depth(root.left.clone()),
+            Self::max_depth(root.right.clone())
+        )
     }
 }
