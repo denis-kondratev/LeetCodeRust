@@ -29,7 +29,21 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 impl Solution {
-    pub fn sorted_array_to_bst(_nums: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
-        None
+    pub fn sorted_array_to_bst(nums: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+        Self::build_bst(&nums)
+    }
+
+    fn build_bst(nums: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
+        if nums.is_empty() {
+            return None;
+        }
+
+        let mid = nums.len() / 2;
+        let root = Rc::new(RefCell::new(TreeNode::new(nums[mid])));
+
+        root.borrow_mut().left = Self::build_bst(&nums[..mid]);
+        root.borrow_mut().right = Self::build_bst(&nums[mid + 1..]);
+
+        Some(root)
     }
 }
