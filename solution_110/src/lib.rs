@@ -29,7 +29,22 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 impl Solution {
-    pub fn is_balanced(_root: Option<Rc<RefCell<TreeNode>>>) -> bool {
-        false
+    pub fn is_balanced(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
+        Self::get_balance_size(root) >= 0
+    }
+
+    fn get_balance_size(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        let Some(root) = root else {
+            return 0;
+        };
+
+        let left_size = Self::get_balance_size(root.borrow().left.clone());
+        let right_size = Self::get_balance_size(root.borrow().right.clone());
+
+        if left_size == -1 || right_size == -1 || (left_size - right_size).abs() > 1 {
+            return -1;
+        }
+
+        1 + left_size.max(right_size)
     }
 }
