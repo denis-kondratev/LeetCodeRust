@@ -26,7 +26,20 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 impl Solution {
-    pub fn min_depth(_root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        0
+    pub fn min_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        let Some(root) = root else {
+            return 0;
+        };
+
+        let left = Self::min_depth(root.borrow().left.clone());
+        let right = Self::min_depth(root.borrow().right.clone());
+
+        if left == 0 {
+            return 1 + right;
+        } else if right == 0 {
+            return 1 + left;
+        }
+
+        1 + std::cmp::min(left, right)
     }
 }
