@@ -31,15 +31,22 @@ impl Solution {
             return 0;
         };
 
-        let left = Self::min_depth(root.borrow().left.clone());
-        let right = Self::min_depth(root.borrow().right.clone());
+        let mut nodes = std::collections::VecDeque::from([(root, 1)]);
 
-        if left == 0 {
-            return 1 + right;
-        } else if right == 0 {
-            return 1 + left;
+        while let Some((node, depth)) = nodes.pop_front() {
+            let node = node.borrow();
+            if node.left.is_none() && node.right.is_none() {
+                return depth;
+            }
+            
+            if let Some(left) = &node.left {
+                nodes.push_back((left.clone(), depth + 1));
+            }
+            if let Some(right) = &node.right {
+                nodes.push_back((right.clone(), depth + 1));
+            }
         }
 
-        1 + std::cmp::min(left, right)
+        unreachable!()
     }
 }
