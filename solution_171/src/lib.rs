@@ -32,7 +32,17 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn title_to_number(_column_title: String) -> i32 {
-        0
+    pub fn title_to_number(column_title: String) -> i32 {
+        let mut result = 0;
+        const MOD: i32 = (b'Z' - b'A') as i32 + 1;
+        let mut multiplier = 1;
+
+        for c in column_title.chars().rev() {
+            let value = (c as i32 - 'A' as i32) + 1;
+            result += value * multiplier;
+            multiplier *= MOD;
+        }
+
+        result
     }
 }
