@@ -20,7 +20,32 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn total_n_queens(_n: i32) -> i32 {
-        0
+    pub fn total_n_queens(n: i32) -> i32 {
+        let n = n as u16;
+        Self::get_queens(n, 0, 0, 0, 0, (1 << n) - 1)
+    }
+
+    fn get_queens(max: u16, cur_row: u16, cols: u16, diags1: u16, diags2: u16, mask: u16) -> i32 {
+        if cur_row == max {
+            return 1;
+        }
+
+        let mut count = 0;
+        let mut col_bits = mask & !(cols | diags1 | diags2);
+
+        while col_bits > 0 {
+            let bit = col_bits & col_bits.wrapping_neg();
+            col_bits ^= bit;
+            count += Self::get_queens(
+                max,
+                cur_row + 1,
+                cols | bit,
+                (diags1 | bit) << 1,
+                (diags2 | bit) >> 1,
+                mask,
+            );
+        }
+
+        count
     }
 }

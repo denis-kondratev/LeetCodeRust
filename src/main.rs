@@ -1,4 +1,4 @@
 fn main() {
-    solution_168::Solution::convert_to_title(27);
+    solution_52::Solution::total_n_queens(4);
     println!("Hello, world!");
 }

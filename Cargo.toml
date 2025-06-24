@@ -11,4 +11,4 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-solution_168 = { path = "solution_168" }
+solution_52 = { path = "solution_52" }
