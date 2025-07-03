@@ -33,7 +33,15 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn reverse_bits(_x: u32) -> u32 {
-        0
+    pub fn reverse_bits(mut x: u32) -> u32 {
+        let mut y = 0;
+
+        for _ in 0..32 {
+            y <<= 1; // Shift y to the left by 1
+            y |= x & 1; // Add the least significant bit of x to y
+            x >>= 1; // Shift x to the right by 1
+        }
+
+        y
     }
 }
