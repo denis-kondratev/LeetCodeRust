@@ -21,7 +21,33 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn merge(_intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
-        vec!()
+    pub fn merge(mut intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        let mut result = vec![];
+
+        if intervals.is_empty() {
+            return result;
+        }
+
+        intervals.sort_by(|a, b| a[0].cmp(&b[0]));
+
+        let first = &intervals[0];
+        let mut left = first[0];
+        let mut right = first[1];
+
+        for interval in intervals.iter().skip(1) {
+            let new_left = interval[0];
+            let new_right = interval[1];
+            if new_left > right {
+                result.push(vec![left, right]);
+                left = new_left;
+                right = new_right;
+            } else if new_right > right {
+                right = new_right;
+            }
+        }
+
+        result.push(vec![left, right]);
+
+        result
     }
 }
