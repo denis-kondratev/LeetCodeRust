@@ -33,7 +33,35 @@
 pub struct Solution;
 
 impl Solution {
-    pub fn insert(_intervals: Vec<Vec<i32>>, _new_interval: Vec<i32>) -> Vec<Vec<i32>> {
-        vec![]
+    pub fn insert(intervals: Vec<Vec<i32>>, new_interval: Vec<i32>) -> Vec<Vec<i32>> {
+        if intervals.is_empty() {
+            return vec![new_interval];
+        }
+
+        let mut result = Vec::new();
+        let mut i = 0;
+        let mut new_interval = (new_interval[0], new_interval[1]);
+
+        while i < intervals.len() {
+            let interval = &intervals[i];
+            let interval = (interval[0], interval[1]);
+
+            if interval.0 > new_interval.1 {
+                break;
+            }
+
+            if interval.1 >= new_interval.0 {
+                new_interval.0 = std::cmp::min(new_interval.0, interval.0);
+                new_interval.1 = std::cmp::max(new_interval.1, interval.1);
+            } else {
+                result.push(vec![interval.0, interval.1]);
+            }
+
+            i += 1;
+        }
+
+        result.push(vec![new_interval.0, new_interval.1]);
+        result.extend_from_slice(&intervals[i..]);
+        result
     }
 }
