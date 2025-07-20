@@ -1,4 +1,4 @@
 fn main() {
-    solution_52::Solution::total_n_queens(4);
+    solution_60::Solution::get_permutation(3, 3);
     println!("Hello, world!");
 }
