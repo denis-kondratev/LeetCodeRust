@@ -2,7 +2,7 @@ workspace = { members = [ "binary_tree", "solution_100","solution_1", "solution_
     "solution_1669", "solution_1863", "solution_234", "solution_2444", "solution_2540", "solution_264", "solution_287",
     "solution_2958", "solution_2962", "solution_349", "solution_383", "solution_41", "solution_442", "solution_452",
     "solution_463", "solution_58", "solution_621", "solution_650", "solution_66", "solution_69", "solution_713",
-    "solution_791", "solution_83", "solution_9", "solution_94", "solution_992", "solution_104", "solution_108", "solution_110", "solution_111", "solution_112", "solution_118", "solution_119", "solution_136", "solution_144", "solution_145", "solution_168", "solution_171", "solution_52", "solution_190", "solution_56", "solution_57", "solution_59", "solution_60"] }
+    "solution_791", "solution_83", "solution_9", "solution_94", "solution_992", "solution_104", "solution_108", "solution_110", "solution_111", "solution_112", "solution_118", "solution_119", "solution_136", "solution_144", "solution_145", "solution_168", "solution_171", "solution_52", "solution_190", "solution_56", "solution_57", "solution_59", "solution_60", "linked_list"] }
 [package]
 name = "leetcode_rust"
 version = "0.1.0"
