@@ -37,3 +37,54 @@
 /// - `s` consists of only English letters (both uppercase and lowercase), digits (0-9), plus
 ///   '+', minus '-', or dot '.'.
 pub struct Solution;
+
+impl Solution {
+    pub fn is_number(s: String) -> bool {
+        if s.is_empty() {
+            return false;
+        }
+
+        let bytes = s.as_bytes();
+        let mut seen_digit = false;
+        let mut seen_dot = false;
+        let mut seen_exp = false;
+        let mut digit_after_exp = true; // becomes relevant only after we see an exponent
+
+        let mut i = 0;
+        while i < bytes.len() {
+            let c = bytes[i];
+            match c {
+                b'0'..=b'9' => {
+                    seen_digit = true;
+                    if seen_exp { digit_after_exp = true; }
+                }
+                b'+' | b'-' => {
+                    // Sign is only allowed at the start or immediately after an exponent
+                    if i != 0 && bytes[i - 1] != b'e' && bytes[i - 1] != b'E' {
+                        return false;
+                    }
+                }
+                b'.' => {
+                    // Dot is not allowed after an exponent and only once overall
+                    if seen_dot || seen_exp {
+                        return false;
+                    }
+                    seen_dot = true;
+                }
+                b'e' | b'E' => {
+                    // Exponent must appear once and only after at least one digit
+                    if seen_exp || !seen_digit {
+                        return false;
+                    }
+                    seen_exp = true;
+                    digit_after_exp = false; // require at least one digit after exponent
+                }
+                _ => return false,
+            }
+            i += 1;
+        }
+
+        // Valid if we've seen a digit overall, and if exponent exists then we also saw a digit after it
+        seen_digit && (!seen_exp || digit_after_exp)
+    }
+}
